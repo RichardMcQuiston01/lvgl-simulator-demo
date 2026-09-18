@@ -7,3 +7,7 @@
   `@richardmcquiston01/lvgl-simulator`'s `loadScreen()`/`createSimulator()`.
 - Floating donate widget (close + minimize, persisted).
 - `docs/PLAN.md` / `docs/ROADMAP.md` multi-agent, multi-stage development plan.
+- CI: cancel superseded runs on the same ref via a `concurrency` group.
+- `package.json` `engines.node`, `.gitignore` entry for the local Vercel
+  CLI link, and a README `Deployments` section linking the live
+  preview/production URLs.
