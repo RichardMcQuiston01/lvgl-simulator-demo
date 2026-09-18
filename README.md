@@ -12,6 +12,10 @@ See [`docs/PLAN.md`](./docs/PLAN.md) for the architecture rationale and the
 multi-agent, multi-stage development plan, and
 [`docs/ROADMAP.md`](./docs/ROADMAP.md) for current stage status.
 
+## Screenshot
+
+![Side-by-side scene editor and live canvas preview, showing the "Full gallery" preset](./docs/images/screenshot.png)
+
 ## Getting Started
 
 ### Prerequisites
@@ -43,8 +47,10 @@ npm run format             # Prettier check
 Edit the JSON in the left-hand editor — it's a
 [`Scene`](https://github.com/RichardMcQuiston01/lvgl-simulator/blob/main/docs/SCENE_SCHEMA.md)
 as consumed by the package's own `loadScreen()` — and the canvas on the right
-updates live. The preset picker above the editor loads a few starting points
-(buttons/checkboxes, a switch and slider, styled buttons, a grid layout).
+updates live. The preset picker above the editor loads a few starting points:
+buttons/checkboxes, a switch and slider, styled buttons, a grid layout, a
+disabled-state example (per-state style overrides — `disabled` alone has no
+default look), and a combined widget gallery.
 
 ```json
 {
@@ -59,6 +65,16 @@ updates live. The preset picker above the editor loads a few starting points
   ]
 }
 ```
+
+## Accessibility
+
+The editor, preset picker, error message, and donate widget are all
+keyboard-reachable with visible focus states and proper labelling. The live
+preview itself is a raw `<canvas>` the underlying package paints pixels to
+directly — it has no accessible content of its own, so its container is
+labelled as a visual-only region (`role="img"` + a descriptive `aria-label`)
+rather than left to confuse assistive tech with an empty name. Inspect a
+scene's actual structure via the JSON editor, which is the source of truth.
 
 ## Development workflow
 

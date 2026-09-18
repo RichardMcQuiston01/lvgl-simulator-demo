@@ -38,7 +38,7 @@ export function CodeEditorPanel({
         <label className="flex items-center gap-2 text-sm text-slate-400">
           Preset
           <select
-            className="rounded-md border border-slate-700 bg-slate-800 px-2 py-1 text-slate-200 focus:border-sky-500 focus:outline-none"
+            className="rounded-md border border-slate-700 bg-slate-800 px-2 py-1 text-slate-200 focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:outline-none"
             value={selectedPresetId}
             onChange={handlePresetChange}
           >
@@ -55,18 +55,15 @@ export function CodeEditorPanel({
         aria-label="Scene JSON editor"
         aria-invalid={error !== null}
         aria-describedby={error !== null ? 'scene-editor-error' : undefined}
-        className="min-h-0 flex-1 resize-none rounded-md border border-slate-700 bg-slate-950 p-3 font-mono text-sm text-slate-100 focus:border-sky-500 focus:outline-none"
+        className="min-h-0 flex-1 resize-none rounded-md border border-slate-700 bg-slate-950 p-3 font-mono text-sm text-slate-100 focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:outline-none"
         spellCheck={false}
         value={sceneText}
         onChange={handleTextareaChange}
       />
 
-      <p
-        id="scene-editor-error"
-        role="alert"
-        aria-live="polite"
-        className="min-h-5 text-sm text-red-400"
-      >
+      {/* `role="alert"` alone is an implicit assertive live region — adding
+          `aria-live` too would just duplicate the announcement. */}
+      <p id="scene-editor-error" role="alert" className="min-h-5 text-sm text-red-400">
         {error ?? ''}
       </p>
     </section>
