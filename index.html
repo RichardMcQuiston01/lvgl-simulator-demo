@@ -9,6 +9,43 @@
       name="description"
       content="Live scene editor and canvas preview for the @richardmcquiston01/lvgl-simulator package."
     />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="LVGL Simulator Demo" />
+    <meta
+      property="og:description"
+      content="Live scene editor and canvas preview for the @richardmcquiston01/lvgl-simulator package."
+    />
+    <meta property="og:url" content="https://lvgl-simulator-demo.vercel.app" />
+    <meta property="og:image" content="https://lvgl-simulator-demo.vercel.app/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LVGL Simulator Demo" />
+    <meta
+      name="twitter:description"
+      content="Live scene editor and canvas preview for the @richardmcquiston01/lvgl-simulator package."
+    />
+    <meta name="twitter:image" content="https://lvgl-simulator-demo.vercel.app/og-image.png" />
+
+    <script>
+      // Applied before first paint to avoid a flash of the wrong theme.
+      // Kept in sync with the logic in src/lib/theme.ts.
+      (function () {
+        try {
+          var stored = localStorage.getItem('lvgl-demo-theme');
+          var theme =
+            stored === 'light' || stored === 'dark'
+              ? stored
+              : matchMedia('(prefers-color-scheme: light)').matches
+                ? 'light'
+                : 'dark';
+          if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (_error) {
+          /* Non-fatal: falls back to the default (dark) look. */
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

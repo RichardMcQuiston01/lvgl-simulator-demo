@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+/* Class-based dark mode: driven by the app's own toggle (src/lib/theme.ts),
+   not just prefers-color-scheme, so the choice is explicit and persists. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 html,
 body,
 #root {
@@ -8,6 +12,5 @@ body,
 
 body {
   margin: 0;
-  background-color: #020617;
-  color-scheme: dark;
+  color-scheme: light dark;
 }

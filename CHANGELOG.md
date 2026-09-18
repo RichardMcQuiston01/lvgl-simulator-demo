@@ -15,3 +15,7 @@
 - `package.json` `engines.node`, `.gitignore` entry for the local Vercel
   CLI link, and a README `Deployments` section linking the live
   preview/production URLs.
+- Help dialog (WAI-ARIA pattern), editor toolbar (Format/Copy/Reset/Share
+  with shareable `#scene=` links), explicit light/dark theme toggle, a
+  deeper accessibility audit (contrast, touch targets, landmarks — see
+  `docs/ROADMAP.md`), a custom favicon, and OG/Twitter meta tags.
