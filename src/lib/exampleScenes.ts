@@ -151,3 +151,8 @@ export const SCENE_PRESETS: readonly ScenePreset[] = [
 ];
 
 export const DEFAULT_PRESET_ID: string = SCENE_PRESETS[0]!.id;
+
+/** Finds `presetId` in `presets`, falling back to the first entry. */
+export function findPreset(presets: readonly ScenePreset[], presetId: string): ScenePreset {
+  return presets.find((preset) => preset.id === presetId) ?? presets[0]!;
+}

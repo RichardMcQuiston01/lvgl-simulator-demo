@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 
+import type { Theme } from '../lib/theme';
 import './donate-widget.css';
 
 const DISMISSED_KEY = 'donate-card-dismissed';
@@ -10,6 +11,13 @@ export interface DonateCardProps {
   readonly donateUrl?: string;
   /** Path to the generated QR SVG, relative to the served root. */
   readonly qrSrc?: string;
+  /**
+   * The app's current theme. The card's own light variant is opt-in by
+   * design (see donate-widget.css) — this isn't tying it to the visitor's
+   * OS preference, it's following the same explicit, project-controlled
+   * choice the app shell itself just made via its own toggle.
+   */
+  readonly theme?: Theme;
 }
 
 function readFlag(key: string): boolean {
@@ -37,6 +45,7 @@ function writeFlag(key: string, value: boolean): void {
 export function DonateCard({
   donateUrl = 'https://donate.stripe.com/00w5kD3Gj1Xo9v7gVOcs800',
   qrSrc = '/donate.svg',
+  theme = 'dark',
 }: DonateCardProps) {
   // This is a client-only SPA (no SSR), so reading localStorage during the
   // lazy initializer is safe and avoids a render with a stale default.
@@ -67,6 +76,7 @@ export function DonateCard({
       <button
         type="button"
         className="donate-pill"
+        data-donate-theme={theme === 'light' ? 'light' : undefined}
         onClick={handleExpand}
         aria-label="Expand support message"
       >
@@ -79,7 +89,11 @@ export function DonateCard({
   }
 
   return (
-    <aside className="donate-card" aria-labelledby="donateCardTitle">
+    <aside
+      className="donate-card"
+      data-donate-theme={theme === 'light' ? 'light' : undefined}
+      aria-labelledby="donateCardTitle"
+    >
       <div className="donate-card__actions">
         <button
           type="button"
