@@ -11,6 +11,9 @@
     "type": "git",
     "url": "git+https://github.com/RichardMcQuiston01/lvgl-simulator-demo.git"
   },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

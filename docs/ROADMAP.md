@@ -41,19 +41,19 @@ Ordered by dependency, not by date. Mirrors the stage numbering in
 - [x] Repo `README.md` finished — usage, a real screenshot
       (`docs/images/screenshot.png`), and an Accessibility section
 
-## Stage 5: CI/CD & Vercel deployment — in progress
+## Stage 5: CI/CD & Vercel deployment — done
 
-- [x] GitHub Actions gate on PRs into `dev`/`staging`/`main` (Stage 0's
-      `ci.yml`; confirmed it already covers all three)
+- [x] GitHub Actions gate on PRs into `dev`/`staging`/`main` (`ci.yml`, with
+      a `concurrency` group so a new push cancels a superseded run)
 - [x] Vercel project linked to the repo (was already connected via GitHub
-      import) — confirmed via the Vercel API that a push to `dev` after the
-      Stage 0-3 merge produced a successful preview deployment
-      (`lvgl-simulator-demo-git-dev-*.vercel.app`, `readyState: READY`),
-      and that `main` already has a production deployment slot
-      (`lvgl-simulator-demo.vercel.app`) that will pick up the app once
-      `main` is promoted
-- [ ] `.gitignore` covers the local Vercel CLI's `.vercel/` link file
-- [ ] `package.json` `engines` field documents the Node version
+      import) — confirmed via the Vercel API that a push to `dev` produced
+      a successful preview deployment (`readyState: READY`) at
+      `lvgl-simulator-demo-git-dev-*.vercel.app`, and that `main` already
+      has a production deployment slot at `lvgl-simulator-demo.vercel.app`
+      that will pick up the app once `main` is promoted
+- [x] `.gitignore` covers the local Vercel CLI's `.vercel/` link file
+- [x] `package.json` `engines.node` documents the minimum Node version
+- [x] README `Deployments` section links the live preview/production URLs
 
 ## Open items
 

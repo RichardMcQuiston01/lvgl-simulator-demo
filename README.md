@@ -86,6 +86,16 @@ scene's actual structure via the JSON editor, which is the source of truth.
 
 See [`docs/PLAN.md`](./docs/PLAN.md) for the full stage-by-stage plan.
 
+## Deployments
+
+Hosted on [Vercel](https://vercel.com), linked to this repository — every
+push gets its own preview deployment, and `main` is the production branch:
+
+- **Production:** https://lvgl-simulator-demo.vercel.app (serves whatever is
+  currently on `main`)
+- **`dev` preview:** https://lvgl-simulator-demo-git-dev-richard-mcquistons-projects.vercel.app
+- **`staging` preview:** https://lvgl-simulator-demo-git-staging-richard-mcquistons-projects.vercel.app
+
 ## License
 
 Apache 2.0 — see [`LICENSE`](./LICENSE).
