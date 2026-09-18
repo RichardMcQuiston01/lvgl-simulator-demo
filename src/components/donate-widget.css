@@ -127,7 +127,11 @@
 }
 
 .donate-card__link {
+  /* padding brings the block-level target to >=24px tall, the WCAG 2.5.8
+     minimum — it's a standalone CTA, not a link inline in running text,
+     so it doesn't qualify for that criterion's inline-text exception. */
   display: block;
+  padding: 0.15rem 0;
   color: var(--donate-link);
   font-size: 0.95rem;
   font-weight: 600;
@@ -140,6 +144,23 @@
 .donate-card__link:focus-visible {
   color: var(--donate-link-hover);
   text-decoration: underline;
+}
+
+/*
+  Light variant is OPT-IN, via data-donate-theme="light" on the card or
+  pill. It is deliberately not tied to prefers-color-scheme — see
+  demo-donate-block's own rationale, which still holds here: the app's
+  own theme toggle is an explicit, project-controlled choice, not the
+  visitor's raw OS preference, so wiring the card to it is the same kind
+  of deliberate choice, not the auto-flip that guidance warns against.
+*/
+.donate-card[data-donate-theme='light'],
+.donate-pill[data-donate-theme='light'] {
+  --donate-bg: #ffffff;
+  --donate-border: #e2e6ef;
+  --donate-title: #131a2a;
+  --donate-text: #5a6478;
+  --donate-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
 }
 
 /* Collapsed state: a small re-expandable pill, replacing the full card. */

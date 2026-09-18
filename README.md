@@ -66,15 +66,33 @@ default look), and a combined widget gallery.
 }
 ```
 
+A toolbar above the editor offers **Format** (re-indent), **Copy**, **Reset**
+(reload the selected preset), and **Share** (copies a link that reopens this
+exact scene). A **?** button in the header opens an in-app help dialog
+covering all of this; a sun/moon button next to it toggles light/dark theme.
+
+This editor works on scene JSON directly — it doesn't convert HTML. To
+convert an existing HTML page into that format instead of hand-writing it,
+see [html2lvgl.com](https://html2lvgl.com/) and its web app,
+[html2lvgl.app](https://www.html2lvgl.app/).
+
 ## Accessibility
 
-The editor, preset picker, error message, and donate widget are all
-keyboard-reachable with visible focus states and proper labelling. The live
-preview itself is a raw `<canvas>` the underlying package paints pixels to
-directly — it has no accessible content of its own, so its container is
-labelled as a visual-only region (`role="img"` + a descriptive `aria-label`)
-rather than left to confuse assistive tech with an empty name. Inspect a
-scene's actual structure via the JSON editor, which is the source of truth.
+Every control — editor, toolbar, preset picker, theme toggle, help dialog,
+and donate widget — is keyboard-reachable with a visible focus state and a
+proper accessible name; the help dialog implements the WAI-ARIA dialog
+pattern (focus moves in, Tab is trapped, Escape/backdrop closes it, focus
+returns to the trigger). The live preview itself is a raw `<canvas>` the
+underlying package paints pixels to directly — it has no accessible content
+of its own, so its container is labelled as a visual-only region
+(`role="img"` + a descriptive `aria-label`) rather than left to confuse
+assistive tech with an empty name. Inspect a scene's actual structure via
+the JSON editor, which is the source of truth.
+
+Verified: WCAG AA text contrast (4.5:1) and non-text/UI-component contrast
+(3:1) for every color pair in both themes; touch targets meet the 24×24px
+minimum (WCAG 2.5.8) at mobile viewport sizes; landmarks, accessible names,
+and heading hierarchy checked with a Playwright accessibility-tree pass.
 
 ## Development workflow
 
