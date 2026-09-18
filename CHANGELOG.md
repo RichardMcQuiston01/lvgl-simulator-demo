@@ -19,3 +19,6 @@
   with shareable `#scene=` links), explicit light/dark theme toggle, a
   deeper accessibility audit (contrast, touch targets, landmarks — see
   `docs/ROADMAP.md`), a custom favicon, and OG/Twitter meta tags.
+- Production uptime monitor: a scheduled GitHub Actions workflow checks
+  `lvgl-simulator-demo.vercel.app` every 15 minutes and files a GitHub issue
+  on failure, auto-closing it once the site recovers.
