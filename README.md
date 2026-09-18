@@ -114,6 +114,10 @@ push gets its own preview deployment, and `main` is the production branch:
 - **`dev` preview:** https://lvgl-simulator-demo-git-dev-richard-mcquistons-projects.vercel.app
 - **`staging` preview:** https://lvgl-simulator-demo-git-staging-richard-mcquistons-projects.vercel.app
 
+A scheduled GitHub Actions workflow (`.github/workflows/uptime-monitor.yml`)
+checks the production URL every 15 minutes and opens a GitHub issue if it
+stops responding, closing it automatically once the site recovers.
+
 ## License
 
 Apache 2.0 — see [`LICENSE`](./LICENSE).
