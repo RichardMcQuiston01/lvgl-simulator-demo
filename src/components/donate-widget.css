@@ -1,0 +1,215 @@
+/*
+  Floating "Support this project" card — adapted from the project's standard
+  demo-donate-block asset, extended with an independent minimize control
+  (collapses to a small pill) alongside the original dismiss control.
+
+  Everything visual is a custom property, so the card can be restyled by
+  overriding a few variables rather than forking the file. Defaults match the
+  dark card design: deep navy panel, muted body copy, indigo link.
+*/
+
+.donate-card {
+  --donate-bg: #131a2a;
+  --donate-border: #263048;
+  --donate-title: #f2f5fb;
+  --donate-text: #9aa4bd;
+  --donate-link: #6d7dff;
+  --donate-link-hover: #8b98ff;
+  --donate-heart: #ff4d5e;
+  --donate-qr-plate: #ffffff;
+  --donate-radius: 14px;
+  --donate-width: 20rem;
+  --donate-gap: 1.25rem;
+  --donate-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+
+  position: fixed;
+  right: var(--donate-gap);
+  bottom: var(--donate-gap);
+  z-index: 9999;
+
+  box-sizing: border-box;
+  width: var(--donate-width);
+  max-width: calc(100vw - (var(--donate-gap) * 2));
+  padding: 1.5rem 1.5rem 1.25rem;
+
+  background: var(--donate-bg);
+  border: 1px solid var(--donate-border);
+  border-radius: var(--donate-radius);
+  box-shadow: var(--donate-shadow);
+
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  text-align: left;
+}
+
+.donate-card__actions {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.6rem;
+  display: flex;
+  gap: 0.15rem;
+}
+
+.donate-card__minimize,
+.donate-card__dismiss {
+  padding: 0.15rem 0.5rem;
+  border: 0;
+  border-radius: 6px;
+
+  background: transparent;
+  color: var(--donate-text);
+  font-size: 1.1rem;
+  line-height: 1.3;
+  cursor: pointer;
+  opacity: 0.6;
+  transition:
+    opacity 120ms ease,
+    background-color 120ms ease;
+}
+
+.donate-card__dismiss {
+  font-size: 1.25rem;
+}
+
+.donate-card__minimize:hover,
+.donate-card__minimize:focus-visible,
+.donate-card__dismiss:hover,
+.donate-card__dismiss:focus-visible {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.donate-card__title {
+  margin: 0 0 0.65rem;
+  color: var(--donate-title);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.donate-card__heart {
+  margin-right: 0.4rem;
+  color: var(--donate-heart);
+}
+
+.donate-card__body {
+  margin: 0 0 1.15rem;
+  color: var(--donate-text);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+/*
+  The white plate is not decoration. Scanners read light modules as "light",
+  so a QR drawn straight onto the dark panel frequently will not resolve.
+*/
+.donate-card__qr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 1.1rem;
+  padding: 0.85rem;
+  width: fit-content;
+
+  background: var(--donate-qr-plate);
+  border-radius: 10px;
+}
+
+.donate-card__qr img {
+  display: block;
+  width: 11rem;
+  height: 11rem;
+}
+
+.donate-card__link {
+  display: block;
+  color: var(--donate-link);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  transition: color 120ms ease;
+}
+
+.donate-card__link:hover,
+.donate-card__link:focus-visible {
+  color: var(--donate-link-hover);
+  text-decoration: underline;
+}
+
+/* Collapsed state: a small re-expandable pill, replacing the full card. */
+.donate-pill {
+  position: fixed;
+  right: var(--donate-gap, 1.25rem);
+  bottom: var(--donate-gap, 1.25rem);
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--donate-border, #263048);
+  border-radius: 999px;
+
+  background: var(--donate-bg, #131a2a);
+  color: var(--donate-title, #f2f5fb);
+  box-shadow: var(--donate-shadow, 0 18px 40px rgba(0, 0, 0, 0.45));
+
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 120ms ease;
+}
+
+.donate-pill:hover,
+.donate-pill:focus-visible {
+  opacity: 0.85;
+}
+
+.donate-pill__heart {
+  color: var(--donate-heart, #ff4d5e);
+}
+
+/*
+  On short or narrow viewports the card competes with the actual demo, which
+  defeats the point. Below this, drop the QR (people on a phone can just tap
+  the link — they are not going to scan their own screen) and shrink the card.
+*/
+@media (max-width: 30rem), (max-height: 34rem) {
+  .donate-card {
+    --donate-width: 17rem;
+    --donate-gap: 0.75rem;
+    padding: 1.1rem 1.1rem 0.9rem;
+  }
+
+  .donate-card__qr {
+    display: none;
+  }
+
+  .donate-card__body {
+    margin-bottom: 0.85rem;
+    font-size: 0.8125rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .donate-card,
+  .donate-card__minimize,
+  .donate-card__dismiss,
+  .donate-card__link,
+  .donate-pill {
+    transition: none;
+  }
+}
