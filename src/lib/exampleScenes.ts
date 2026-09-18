@@ -75,12 +75,79 @@ const gridLayout: Scene = {
   ],
 };
 
+// The `disabled` flag only excludes a widget from pointer interaction — the
+// library ships no default disabled *look* (see defaultTheme.disabledColor,
+// which isn't wired to any widget's states automatically), so this preset
+// supplies its own `style.states.disabled` override to actually show it,
+// the same per-state-override mechanism the package README demonstrates
+// for a custom pressed color.
+const disabledControls: Scene = {
+  version: 1,
+  width: 240,
+  height: 140,
+  padding: 16,
+  layout: { type: 'flex', direction: 'column', rowGap: 12 },
+  children: [
+    { type: 'label', width: 200, height: 20, text: 'Disabled state' },
+    {
+      type: 'button',
+      width: 120,
+      height: 32,
+      text: 'Disabled',
+      disabled: true,
+      style: { base: {}, states: { disabled: { bgColor: '#e0e0e0', textColor: '#9e9e9e' } } },
+    },
+    {
+      type: 'checkbox',
+      width: 160,
+      height: 20,
+      text: 'Locked',
+      checked: true,
+      disabled: true,
+      indicatorStyle: { base: {}, states: { checked: { bgColor: '#bdbdbd' } } },
+    },
+  ],
+};
+
+const fullGallery: Scene = {
+  version: 1,
+  width: 260,
+  height: 220,
+  padding: 16,
+  layout: { type: 'flex', direction: 'column', rowGap: 10 },
+  children: [
+    { type: 'label', width: 220, height: 18, text: 'Widget gallery' },
+    {
+      type: 'container',
+      width: 220,
+      height: 32,
+      layout: { type: 'flex', columnGap: 8 },
+      children: [
+        { type: 'button', width: 80, height: 32, text: 'OK' },
+        { type: 'checkbox', width: 100, height: 20, text: 'Agree' },
+      ],
+    },
+    {
+      type: 'container',
+      width: 220,
+      height: 24,
+      layout: { type: 'flex', columnGap: 12 },
+      children: [
+        { type: 'switch', width: 44, height: 24, checked: true },
+        { type: 'slider', width: 140, height: 20, min: 0, max: 100, value: 40 },
+      ],
+    },
+  ],
+};
+
 /** Presets shown in the picker, in display order. */
 export const SCENE_PRESETS: readonly ScenePreset[] = [
   { id: 'getting-started', label: 'Getting started', scene: gettingStarted },
   { id: 'switch-and-slider', label: 'Switch & slider', scene: switchAndSlider },
   { id: 'styled-buttons', label: 'Styled buttons', scene: styledButtons },
   { id: 'grid-layout', label: 'Grid layout', scene: gridLayout },
+  { id: 'disabled-controls', label: 'Disabled state', scene: disabledControls },
+  { id: 'full-gallery', label: 'Full gallery', scene: fullGallery },
 ];
 
 export const DEFAULT_PRESET_ID: string = SCENE_PRESETS[0]!.id;

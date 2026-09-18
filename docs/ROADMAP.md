@@ -27,13 +27,19 @@ Ordered by dependency, not by date. Mirrors the stage numbering in
 - [x] Close control (persisted)
 - [x] Minimize control (persisted, independent of close)
 
-## Stage 4: Polish, examples, docs — in progress
+## Stage 4: Polish, examples, docs — done
 
-- [ ] Expanded preset gallery
-- [ ] Accessibility pass
-- [ ] Repo `README.md` finished (usage, screenshot)
-
-(open as a PR — see repo PRs for current status)
+- [x] Expanded preset gallery (disabled-state example, combined widget
+      gallery, on top of the original four)
+- [x] Accessibility pass — visible focus rings on every interactive control,
+      the error message uses `role="alert"` correctly (no redundant
+      `aria-live`), the preview canvas's container is labelled as a
+      visual-only region (`role="img"` + descriptive `aria-label`) instead
+      of exposing an unlabelled/empty node, and a keyboard-only tab pass
+      (preset picker → editor → donate controls) was verified end to end
+      with Playwright
+- [x] Repo `README.md` finished — usage, a real screenshot
+      (`docs/images/screenshot.png`), and an Accessibility section
 
 ## Stage 5: CI/CD & Vercel deployment — done
 
