@@ -55,10 +55,34 @@ Ordered by dependency, not by date. Mirrors the stage numbering in
 - [x] `package.json` `engines.node` documents the minimum Node version
 - [x] README `Deployments` section links the live preview/production URLs
 
+## Stage 4 follow-ups — done
+
+Requested after Stage 4 shipped; not part of the original stage scope.
+
+- [x] Help button opening an accessible dialog (WAI-ARIA pattern, focus
+      trap, Escape/backdrop close) documenting the demo, presets, toolbar,
+      keyboard shortcuts, and accessibility scope — plus a "Converting
+      from HTML" section linking [html2lvgl.com](https://html2lvgl.com/)
+      and [html2lvgl.app](https://www.html2lvgl.app/) for anyone who wants
+      to start from HTML instead of hand-writing scene JSON
+- [x] Editor toolbar: Format, Copy, Reset, and Share (encodes the scene
+      into a `#scene=` URL fragment; loaded back as a synthetic preset)
+- [x] Explicit light/dark theme toggle (class-based, persisted,
+      anti-flash inline script), synced to the donate widget's own
+      opt-in light variant
+- [x] Deeper accessibility audit: WCAG AA text contrast (4.5:1) and
+      non-text/UI-component contrast (3:1) verified programmatically for
+      every color pair in both themes (fixed one failing light link
+      color and bumped interactive-control borders to a passing value);
+      mobile/touch pass at iPhone viewport size (fixed one donate-link
+      target under the 24×24px WCAG 2.5.8 minimum); landmarks/labels/
+      heading-hierarchy pass via Playwright's accessibility tree
+- [x] Custom favicon (replacing the default Vite icon) and OG/Twitter
+      social preview meta tags
+
 ## Open items
 
 - No target dates yet.
-- Production (`lvgl-simulator-demo.vercel.app`) still serves the
-  pre-scaffold placeholder until `dev` is promoted through `staging` to
-  `main` per the branching flow in `docs/PLAN.md` — that promotion is a
-  separate, deliberate step, not part of either stage above.
+- Production (`lvgl-simulator-demo.vercel.app`) now serves the real app —
+  the `dev` → `staging` → `main` promotion (PRs #5, #6) completed after
+  Stage 5 shipped.

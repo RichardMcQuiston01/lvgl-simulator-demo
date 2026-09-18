@@ -127,7 +127,11 @@
 }
 
 .donate-card__link {
+  /* padding brings the block-level target to >=24px tall, the WCAG 2.5.8
+     minimum — it's a standalone CTA, not a link inline in running text,
+     so it doesn't qualify for that criterion's inline-text exception. */
   display: block;
+  padding: 0.15rem 0;
   color: var(--donate-link);
   font-size: 0.95rem;
   font-weight: 600;

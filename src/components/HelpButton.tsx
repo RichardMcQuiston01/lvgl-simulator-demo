@@ -201,6 +201,34 @@ export function HelpButton() {
                 </p>
               </section>
 
+              <section>
+                <h3 className="font-semibold text-slate-900 dark:text-slate-100">
+                  Converting from HTML
+                </h3>
+                <p>
+                  This editor works on scene JSON directly. To convert an existing HTML page into
+                  that format instead of hand-writing it, see{' '}
+                  <a
+                    href="https://html2lvgl.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sky-700 underline dark:text-sky-400"
+                  >
+                    html2lvgl.com
+                  </a>{' '}
+                  and its web app,{' '}
+                  <a
+                    href="https://www.html2lvgl.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sky-700 underline dark:text-sky-400"
+                  >
+                    html2lvgl.app
+                  </a>
+                  .
+                </p>
+              </section>
+
               <p>
                 Full scene format:{' '}
                 <a
