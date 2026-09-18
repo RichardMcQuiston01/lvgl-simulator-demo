@@ -80,6 +80,20 @@ Requested after Stage 4 shipped; not part of the original stage scope.
 - [x] Custom favicon (replacing the default Vite icon) and OG/Twitter
       social preview meta tags
 
+## Monitoring — done
+
+Requested after production went live; not part of the original stage scope.
+
+- [x] Full production smoke test run manually against the live URL in a
+      real browser (page load, canvas render, all presets, editor toolbar,
+      invalid-JSON handling, theme toggle, help dialog, donate widget, and
+      a fresh-page share-link round trip) — 20/20 checks passed
+- [x] Scheduled GitHub Actions workflow (`.github/workflows/uptime-monitor.yml`)
+      checks the production URL every 15 minutes for a 2xx response with the
+      expected page title, opens a GitHub issue (`uptime-alert` label) on
+      failure — commenting instead of duplicating if one is already open —
+      and auto-closes it once a later run confirms recovery
+
 ## Open items
 
 - No target dates yet.

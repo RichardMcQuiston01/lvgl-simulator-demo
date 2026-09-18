@@ -1,0 +1,112 @@
+name: Production Uptime Monitor
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+env:
+  SITE_URL: https://lvgl-simulator-demo.vercel.app
+  EXPECTED_TITLE: <title>LVGL Simulator Demo</title>
+  ALERT_TITLE: '🔴 Production site down: lvgl-simulator-demo.vercel.app'
+  ALERT_LABEL: uptime-alert
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check production site
+        id: check
+        run: |
+          if curl --fail --silent --show-error --max-time 15 \
+               --retry 3 --retry-delay 5 --retry-all-errors \
+               -o response.html "$SITE_URL"; then
+            if grep -qF "$EXPECTED_TITLE" response.html; then
+              echo "status=up" >> "$GITHUB_OUTPUT"
+            else
+              echo "status=down" >> "$GITHUB_OUTPUT"
+              echo "reason=Page responded but did not contain the expected title" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo "status=down" >> "$GITHUB_OUTPUT"
+            echo "reason=Request failed (non-2xx response or network error)" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open or update alert issue on failure
+        if: steps.check.outputs.status == 'down'
+        uses: actions/github-script@v7
+        env:
+          REASON: ${{ steps.check.outputs.reason }}
+        with:
+          script: |
+            const title = process.env.ALERT_TITLE;
+            const reason = process.env.REASON || 'Unknown failure';
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const detectedAt = new Date().toISOString();
+
+            const { data: openAlerts } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: process.env.ALERT_LABEL,
+            });
+            const existing = openAlerts.find((issue) => issue.title === title);
+
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body: `Still down as of ${detectedAt}.\n\n**Reason:** ${reason}\n**Run:** ${runUrl}`,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                labels: [process.env.ALERT_LABEL],
+                body: [
+                  `The uptime monitor detected that ${process.env.SITE_URL} is not responding correctly.`,
+                  '',
+                  `**Reason:** ${reason}`,
+                  `**Detected:** ${detectedAt}`,
+                  `**Workflow run:** ${runUrl}`,
+                  '',
+                  'This issue closes automatically once the site is confirmed healthy again.',
+                ].join('\n'),
+              });
+            }
+
+      - name: Close alert issue on recovery
+        if: steps.check.outputs.status == 'up'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = process.env.ALERT_TITLE;
+            const recoveredAt = new Date().toISOString();
+
+            const { data: openAlerts } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: process.env.ALERT_LABEL,
+            });
+
+            for (const issue of openAlerts.filter((i) => i.title === title)) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `Site is back up as of ${recoveredAt}.`,
+              });
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed',
+              });
+            }
