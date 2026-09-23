@@ -1,5 +1,7 @@
 import type { Ref } from 'react';
 
+import { Html2LvglBanner } from './Html2LvglBanner';
+
 export interface PreviewPanelProps {
   readonly containerRef: Ref<HTMLDivElement>;
 }
@@ -25,6 +27,8 @@ export function PreviewPanel({ containerRef }: PreviewPanelProps) {
           className="[&>canvas]:shadow-lg"
         />
       </div>
+
+      <Html2LvglBanner />
     </section>
   );
 }

@@ -25,7 +25,7 @@ export function Html2LvglBanner() {
     <div
       role="region"
       aria-label="html2lvgl promotion"
-      className="flex items-center justify-between gap-3 border-b border-sky-200 bg-sky-50 px-4 py-2 text-sm text-sky-900 dark:border-sky-900 dark:bg-sky-950 dark:text-sky-100"
+      className="flex shrink-0 items-center justify-between gap-3 rounded-md border border-sky-200 bg-sky-50 px-3 py-2 text-sm text-sky-900 dark:border-sky-900 dark:bg-sky-950 dark:text-sky-100"
     >
       <p>
         Have an HTML page you want as an LVGL scene? Convert it automatically with{' '}

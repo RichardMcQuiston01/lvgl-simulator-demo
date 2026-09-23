@@ -3,7 +3,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { CodeEditorPanel } from './components/CodeEditorPanel';
 import { DonateCard } from './components/DonateCard';
 import { HelpButton } from './components/HelpButton';
-import { Html2LvglBanner } from './components/Html2LvglBanner';
 import { PreviewPanel } from './components/PreviewPanel';
 import { ThemeToggle } from './components/ThemeToggle';
 import {
@@ -124,8 +123,6 @@ export function App() {
 
   return (
     <div className="flex h-screen min-h-0 flex-col bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
-      <Html2LvglBanner />
-
       <header className="flex items-start justify-between gap-4 border-b border-slate-200 px-4 py-3 dark:border-slate-800">
         <div>
           <h1 className="text-lg font-semibold">LVGL Simulator Demo</h1>
