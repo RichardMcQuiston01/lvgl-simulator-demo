@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 
+import { readFlag, writeFlag } from '../lib/persistentFlag';
 import type { Theme } from '../lib/theme';
 import './donate-widget.css';
 
@@ -18,22 +19,6 @@ export interface DonateCardProps {
    * choice the app shell itself just made via its own toggle.
    */
   readonly theme?: Theme;
-}
-
-function readFlag(key: string): boolean {
-  try {
-    return window.localStorage.getItem(key) === '1';
-  } catch {
-    return false;
-  }
-}
-
-function writeFlag(key: string, value: boolean): void {
-  try {
-    window.localStorage.setItem(key, value ? '1' : '0');
-  } catch {
-    /* Non-fatal: the choice just won't survive a reload. */
-  }
 }
 
 /**
