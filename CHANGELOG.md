@@ -22,3 +22,9 @@
 - Production uptime monitor: a scheduled GitHub Actions workflow checks
   `lvgl-simulator-demo.vercel.app` every 15 minutes and files a GitHub issue
   on failure, auto-closing it once the site recovers.
+- Bumped `@richardmcquiston01/lvgl-simulator` to `^0.2.0` and added a
+  "Navigation Demo" mode (header toggle) showcasing its new
+  `createNavigator()` API: a fixed three-screen demo (Home → Settings →
+  Advanced) plus a "How it works" panel with a read-only code snippet,
+  since navigation's `push`/`pop` wiring is live code the JSON scene
+  editor can't express.
