@@ -57,3 +57,16 @@ This editor works on scene JSON directly — it doesn't convert HTML. To
 convert an existing HTML page into that format instead of hand-writing it,
 see [html2lvgl.com](https://html2lvgl.com/) and its web app,
 [html2lvgl.app](https://www.html2lvgl.app/).
+
+## Navigation demo
+
+The **Navigation Demo** toggle in the header switches to a fixed,
+interactive demo of
+[`createNavigator()`](https://github.com/RichardMcQuiston01/lvgl-simulator/blob/main/docs/GETTING_STARTED.md#navigation-multi-view-uis) —
+the package's multi-screen navigation API (added in `0.2.0`). Click
+**Settings** to push a second screen, **Advanced** to push a third (capped
+at `maxDepth: 2`), and **Back** to pop one level. Unlike the Scene Editor,
+this mode isn't backed by JSON and isn't editable: a navigator's
+`push`/`pop` calls are wired up as live event-listener code, which the
+scene schema has no way to express. The left-hand panel explains the API
+and shows the actual wiring behind the demo.

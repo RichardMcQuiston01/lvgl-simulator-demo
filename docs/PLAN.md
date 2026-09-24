@@ -10,6 +10,13 @@ published package's `loadScreen()`/`createSimulator()` — nothing about the
 simulator's own rendering, widgets, or scene schema is reimplemented here;
 this repo only consumes it as a normal npm dependency.
 
+A second "Navigation Demo" mode (toggle in the header) showcases the
+package's `createNavigator()` (added in `0.2.0`) the same way — as a normal
+consumer, not a reimplementation. It's a fixed, non-editable demo rather
+than a JSON preset: a navigator's `push`/`pop` wiring is live code (an
+`addEventListener('clicked', ...)` calling `navigator.push()`), which the
+scene schema has no way to express.
+
 ## Conventions
 
 - TypeScript, `strict: true`, Google TypeScript Style Guide.

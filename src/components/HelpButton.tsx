@@ -165,6 +165,21 @@ export function HelpButton() {
               </section>
 
               <section>
+                <h3 className="font-semibold text-slate-900 dark:text-slate-100">
+                  Navigation Demo mode
+                </h3>
+                <p>
+                  The toggle in the header switches to a fixed demo of{' '}
+                  <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                    createNavigator()
+                  </code>
+                  , the package&apos;s multi-screen navigation API. It isn&apos;t backed by JSON — a
+                  navigator&apos;s push/pop wiring is live code the scene schema can&apos;t express
+                  — so it isn&apos;t editable like the Scene Editor.
+                </p>
+              </section>
+
+              <section>
                 <h3 className="font-semibold text-slate-900 dark:text-slate-100">Editor toolbar</h3>
                 <ul className="list-disc space-y-0.5 pl-5">
                   <li>

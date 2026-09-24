@@ -6,7 +6,9 @@ TypeScript based Single Page Application(SPA) demo for the
 [`@richardmcquiston01/lvgl-simulator`](https://www.npmjs.com/package/@richardmcquiston01/lvgl-simulator)
 package: a side-by-side JSON scene editor and live canvas preview, rendered
 entirely in the browser via the published package — no server, no build step
-at runtime.
+at runtime. A second **Navigation Demo** mode (header toggle) showcases the
+package's `createNavigator()` multi-screen navigation API with a fixed,
+interactive three-screen demo.
 
 ## Screenshot
 

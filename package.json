@@ -24,7 +24,7 @@
     "format:write": "prettier --write ."
   },
   "dependencies": {
-    "@richardmcquiston01/lvgl-simulator": "^0.1.1",
+    "@richardmcquiston01/lvgl-simulator": "^0.2.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
   },
