@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { CodeEditorPanel } from './components/CodeEditorPanel';
+import { DemoModeToggle, type DemoMode } from './components/DemoModeToggle';
 import { DonateCard } from './components/DonateCard';
 import { HelpButton } from './components/HelpButton';
+import { NavigationDemoPanel } from './components/NavigationDemoPanel';
 import { PreviewPanel } from './components/PreviewPanel';
 import { ThemeToggle } from './components/ThemeToggle';
 import {
@@ -35,6 +37,7 @@ function readSharedPresetFromLocation(): ScenePreset | null {
 
 export function App() {
   const [theme, toggleTheme] = useTheme();
+  const [mode, setMode] = useState<DemoMode>('editor');
 
   const [sharedPreset] = useState<ScenePreset | null>(() => readSharedPresetFromLocation());
   const presets = useMemo<readonly ScenePreset[]>(
@@ -127,34 +130,53 @@ export function App() {
         <div>
           <h1 className="text-lg font-semibold">LVGL Simulator Demo</h1>
           <p className="text-sm text-slate-600 dark:text-slate-400">
-            Edit the scene JSON on the left; the canvas on the right updates live via{' '}
-            <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
-              @richardmcquiston01/lvgl-simulator
-            </code>
-            .
+            {mode === 'editor' ? (
+              <>
+                Edit the scene JSON on the left; the canvas on the right updates live via{' '}
+                <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                  @richardmcquiston01/lvgl-simulator
+                </code>
+                .
+              </>
+            ) : (
+              <>
+                A live, interactive demo of{' '}
+                <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-slate-800">
+                  createNavigator()
+                </code>
+                , this package's multi-screen navigation API.
+              </>
+            )}
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-2">
+          <DemoModeToggle mode={mode} onChange={setMode} />
           <ThemeToggle theme={theme} onToggle={toggleTheme} />
           <HelpButton />
         </div>
       </header>
 
       <main className="flex min-h-0 flex-1 flex-col overflow-auto lg:flex-row">
-        <CodeEditorPanel
-          sceneText={sceneText}
-          onSceneTextChange={setSceneText}
-          presets={presets}
-          selectedPresetId={selectedPresetId}
-          onSelectPreset={handleSelectPreset}
-          error={error}
-          statusMessage={statusMessage}
-          onFormat={handleFormat}
-          onCopy={handleCopy}
-          onReset={handleReset}
-          onShare={handleShare}
-        />
-        <PreviewPanel containerRef={containerRef} />
+        {mode === 'editor' ? (
+          <>
+            <CodeEditorPanel
+              sceneText={sceneText}
+              onSceneTextChange={setSceneText}
+              presets={presets}
+              selectedPresetId={selectedPresetId}
+              onSelectPreset={handleSelectPreset}
+              error={error}
+              statusMessage={statusMessage}
+              onFormat={handleFormat}
+              onCopy={handleCopy}
+              onReset={handleReset}
+              onShare={handleShare}
+            />
+            <PreviewPanel containerRef={containerRef} />
+          </>
+        ) : (
+          <NavigationDemoPanel />
+        )}
       </main>
 
       <DonateCard theme={theme} />

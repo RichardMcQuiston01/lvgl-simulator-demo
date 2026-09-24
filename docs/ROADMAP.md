@@ -94,6 +94,23 @@ Requested after production went live; not part of the original stage scope.
       failure — commenting instead of duplicating if one is already open —
       and auto-closes it once a later run confirms recovery
 
+## Navigation demo — done
+
+Requested after `@richardmcquiston01/lvgl-simulator` 0.2.0 added
+`createNavigator()`; not part of the original stage scope.
+
+- [x] Bumped the `@richardmcquiston01/lvgl-simulator` dependency to `^0.2.0`
+- [x] Header toggle between "Scene Editor" (existing) and "Navigation Demo"
+      (new) modes
+- [x] "Navigation Demo" mode: a fixed, non-editable three-screen demo
+      (Home → Settings → Advanced, `maxDepth: 2`) wired with
+      `createNavigator()`, plus a "How it works" panel explaining why it
+      isn't JSON-editable (navigation is live code, not scene data) with a
+      read-only code snippet of the actual wiring
+- [x] Verified end to end in a headless browser: mode toggle, Home →
+      Settings → Advanced → Back → Back, and switching back to Scene Editor
+      mode without leaking the previous simulator instance
+
 ## Open items
 
 - No target dates yet.
