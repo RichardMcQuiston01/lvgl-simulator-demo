@@ -10,7 +10,13 @@ import {
 const DEBOUNCE_MS = 300;
 
 export interface SimulatorPreviewResult {
-  readonly containerRef: React.RefObject<HTMLDivElement | null>;
+  /**
+   * A callback ref, not a `RefObject` — the hook needs to know exactly when
+   * the container element is (re)attached (e.g. `PreviewPanel` unmounting
+   * and remounting as the app switches modes), not just its latest value,
+   * so the mount effect below can depend on it.
+   */
+  readonly containerRef: (node: HTMLDivElement | null) => void;
   /** Descriptive parse/render error for the current text, or `null` when it rendered cleanly. */
   readonly error: string | null;
 }
@@ -40,12 +46,11 @@ function parseScene(sceneJsonText: string): Scene {
  * tearing down whatever last rendered successfully.
  */
 export function useSimulatorPreview(sceneJsonText: string): SimulatorPreviewResult {
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const simulatorRef = useRef<Simulator | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const container = containerRef.current;
     if (!container) {
       return;
     }
@@ -75,7 +80,7 @@ export function useSimulatorPreview(sceneJsonText: string): SimulatorPreviewResu
     }, DEBOUNCE_MS);
 
     return () => window.clearTimeout(timeoutId);
-  }, [sceneJsonText]);
+  }, [container, sceneJsonText]);
 
   // Unmount-only cleanup, separate from the per-keystroke effect above so a
   // debounced re-render mid-typing never tears down the live simulator.
@@ -86,5 +91,5 @@ export function useSimulatorPreview(sceneJsonText: string): SimulatorPreviewResu
     };
   }, []);
 
-  return { containerRef, error };
+  return { containerRef: setContainer, error };
 }
