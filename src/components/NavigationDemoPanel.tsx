@@ -1,7 +1,7 @@
 import { useNavigationDemo } from '../lib/useNavigationDemo';
 import { Html2LvglBanner } from './Html2LvglBanner';
 
-const CODE_SNIPPET = `const viewLayout = { type: 'flex', direction: 'column', rowGap: 12, crossAlign: 'start' };
+const CODE_SNIPPET = `const viewLayout = { type: 'flex', direction: 'column', rowGap: 12, crossAlign: 'start' } as const;
 const home = new Container({ width: 320, height: 240, padding: 12, layout: viewLayout });
 const settings = new Container({ width: 320, height: 240, padding: 12, layout: viewLayout });
 const advanced = new Container({ width: 320, height: 240, padding: 12, layout: viewLayout });
