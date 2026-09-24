@@ -3,15 +3,22 @@ import { Html2LvglBanner } from './Html2LvglBanner';
 
 const CODE_SNIPPET = `const home = new Container({ width: 320, height: 240, padding: 12 });
 const settings = new Container({ width: 320, height: 240, padding: 12 });
+const advanced = new Container({ width: 320, height: 240, padding: 12 });
 
 const openSettings = new Button({ width: 140, height: 32, text: 'Settings' });
-const back = new Button({ width: 140, height: 32, text: 'Back' });
+const openAdvanced = new Button({ width: 140, height: 32, text: 'Advanced' });
+const settingsBack = new Button({ width: 140, height: 32, text: 'Back' });
+const advancedBack = new Button({ width: 140, height: 32, text: 'Back' });
 home.addChild(openSettings);
-settings.addChild(back);
+settings.addChild(openAdvanced);
+settings.addChild(settingsBack);
+advanced.addChild(advancedBack);
 
-const navigator = createNavigator(simulator.screen, home, simulator.renderOnce);
+const navigator = createNavigator(simulator.screen, home, simulator.renderOnce, { maxDepth: 2 });
 openSettings.addEventListener('clicked', () => navigator.push(settings));
-back.addEventListener('clicked', () => navigator.pop());`;
+openAdvanced.addEventListener('clicked', () => navigator.push(advanced));
+settingsBack.addEventListener('clicked', () => navigator.pop());
+advancedBack.addEventListener('clicked', () => navigator.pop());`;
 
 /** Left-hand pane: explains `createNavigator()` and shows the wiring behind the live demo. */
 function HowItWorksPanel() {
