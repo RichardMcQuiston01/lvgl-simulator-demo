@@ -23,7 +23,7 @@ Ordered by dependency, not by date. Mirrors the stage numbering in
 
 ## Stage 3: Floating donate widget — done
 
-- [x] Bottom-right card (QR + Stripe link)
+- [x] Bottom-right card (QR + PayPal link)
 - [x] Close control (persisted)
 - [x] Minimize control (persisted, independent of close)
 

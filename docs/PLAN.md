@@ -99,13 +99,13 @@ concurrently once Stage 0 lands; everything else is sequential. See
 
 **Agent role:** Donate Agent · depends on Stage 0, parallel with Stage 1/2
 
-- Fixed bottom-right card (QR + "Donate via Stripe" link) per the project's
+- Fixed bottom-right card (QR + "Donate via PayPal" link) per the project's
   standard donate block, extended with two independent controls: **close**
   (dismisses entirely) and **minimize** (collapses to a small pill,
   re-expandable) — both states persisted in `localStorage` across reloads.
 - **Exit criteria:** Card renders bottom-right on load (unless previously
   dismissed); minimize collapses/re-expands without losing state; close
-  persists across a reload; QR decodes to the Stripe link.
+  persists across a reload; QR decodes to the PayPal link.
 
 ### Stage 4 — Polish, examples, docs
 

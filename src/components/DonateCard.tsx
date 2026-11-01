@@ -8,7 +8,7 @@ const DISMISSED_KEY = 'donate-card-dismissed';
 const MINIMIZED_KEY = 'donate-card-minimized';
 
 export interface DonateCardProps {
-  /** Stripe payment link the card sends people to. */
+  /** PayPal payment link the card sends people to. */
   readonly donateUrl?: string;
   /** Path to the generated QR SVG, relative to the served root. */
   readonly qrSrc?: string;
@@ -28,8 +28,8 @@ export interface DonateCardProps {
  * each other.
  */
 export function DonateCard({
-  donateUrl = 'https://donate.stripe.com/00w5kD3Gj1Xo9v7gVOcs800',
-  qrSrc = '/donate.svg',
+  donateUrl = 'https://www.paypal.com/ncp/payment/RZ4BDP9QFY4NU',
+  qrSrc = '/donate.png',
   theme = 'dark',
 }: DonateCardProps) {
   // This is a client-only SPA (no SSR), so reading localStorage during the
@@ -113,7 +113,7 @@ export function DonateCard({
       <div className="donate-card__qr">
         <img
           src={qrSrc}
-          alt="QR code linking to the Stripe donation page"
+          alt="QR code linking to the PayPal donation page"
           width={180}
           height={180}
         />
@@ -124,9 +124,9 @@ export function DonateCard({
         href={donateUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Donate via Stripe, opens in a new tab"
+        aria-label="Donate via PayPal, opens in a new tab"
       >
-        Donate via Stripe <span aria-hidden="true">&rarr;</span>
+        Donate via PayPal <span aria-hidden="true">&rarr;</span>
       </a>
     </aside>
   );
